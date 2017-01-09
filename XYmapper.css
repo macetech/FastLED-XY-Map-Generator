@@ -1,0 +1,112 @@
+.ledpixel {
+  display:table-cell;
+  position: relative;
+  margin: 0em;
+  border:0.1em solid gray;
+  min-width: 3em;
+  height: 3em;
+  text-align: center;
+  vertical-align: bottom;
+  background-image: url("ws2812.png");
+  background-size: 100% 100%;
+}
+
+.disabledPixel {
+  display:table-cell;
+  position: relative;
+  margin: 0em;
+  border:0.1em solid gray;
+  min-width: 3em;
+  height: 3em;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.ledtext {
+  display:inline-block;
+  color: white;
+  font-size: 0.75em;
+  border: none;
+  border-radius: 0.5em 0.5em 0 0;
+  font-family: sans-serif;;
+  text-align: center;
+  vertical-align: middle;
+  background-color: blue;
+  padding: 0.1em;
+  min-width: 1.5em;
+}
+
+.ledarray {
+  display: table;
+  border-collapse: collapse;
+  background-color: black;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.ledrow {
+  display: table-row;
+}
+
+.triangle-left {
+  position:absolute;
+  top: 50%;
+  margin-top: -.75em;
+  right:0;
+  width:0;
+  height:0;
+  border-style: solid;
+  border-width: 0.75em;
+  border-color: transparent #FF0000 transparent transparent;
+}
+
+.triangle-right {
+  position:absolute;
+  top: 50%;
+  margin-top: -.75em;
+  left:0;
+  width:0;
+  height:0;
+  border-style: solid;
+  border-width: 0.75em;
+  border-color: transparent transparent transparent #00FF00;
+}
+
+.controls {
+  font-family: sans-serif;
+  font-size: 1em;
+  display: block;
+}
+.inputBox {
+  font-family: sans-serif;
+  height: 1.5em;
+  line-height: 1.5em;
+  width: 8em;
+  display: block;
+}
+
+.inputBox input {
+  display: block;
+  float:none;
+  font-size: 1em;
+  padding: 0; margin: 0;
+  width: 3em;
+}
+
+.inputText {
+  display:block;
+  float:left;
+  width: 4em;
+}
+
+#rebuildArray {
+  font-size: 1em;
+  width: 8em;
+  float:none;
+}
+
+#result {
+  background: black;
+  color: lime;
+  padding: 1em;
+}

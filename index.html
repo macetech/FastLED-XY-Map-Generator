@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FastLED XY Map Generator</title>
+    <link rel="stylesheet" type="text/css" href="XYmapper.css">
+
+    <script src="XYmapper.js"></script>
+
+  </head>
+  <body>
+    <h1>FastLED XY Map Generator</h1>
+    <p>by Garrett Mace (macetech.com), inspired by Mark Kriegsman</p>
+    <h3>Automatically generates XYmap function for irregular/gapped LED arrays.</h3>
+    <p>Set the maximum x and y dimensions, layout style, and click Rebuild. Then click LEDs to disable/enable array gaps.</p>
+    <p>Copy the resulting function and paste into your code</p>
+
+    <div class="controls">
+      <input type="checkbox" id="serpentineCHK" onchange="serpentineLayout(this)" checked>Serpentine</input>
+      <input type="checkbox" id="reverseCHK" onchange="reverseLayout(this)">Reverse</input><br>
+      <div class="inputBox"><label class="inputText">Width</label><input id="xdim" type="number" name="xdim" min="1" value="16"/></div>
+      <div class="inputBox"><label class="inputText">Height</label><input id="ydim" type="number" name="ydim" min="1" value="5"/></div>
+    </div>
+      <button id="rebuildArray" onclick="buildGrid()">Rebuild</button>
+
+    <div id="ledgrid"></div>
+    <div id="result">Map goes here.</div>
+  </body>
+</html>

@@ -11,7 +11,9 @@ var xdim = 0;
 var ydim = 0;
 var pixelarray = [];
 var serpentine = 0;
-var reverse = 0;
+var hflip = 0;
+var vflip = 1;
+var vertical = 0;
 
 
 function serpentineLayout(event) {
@@ -27,11 +29,36 @@ function serpentineLayout(event) {
 
 }
 
-function reverseLayout(event) {
+function hflipLayout(event) {
   if (event.checked) {
-    reverse = 1;
+    hflip = 1;
   } else {
-    reverse = 0;
+    hflip = 0;
+  }
+
+  renumberLEDs();
+  drawArrows();
+  printMap();
+}
+
+function vflipLayout(event) {
+  if (event.checked) {
+    vflip = 1;
+  } else {
+    vflip = 0;
+  }
+
+  renumberLEDs();
+  drawArrows();
+  printMap();
+}
+
+
+function verticalLayout(event) {
+  if (event.checked) {
+    vertical = 1;
+  } else {
+    vertical = 0;
   }
 
   renumberLEDs();
@@ -42,12 +69,15 @@ function reverseLayout(event) {
 
 function buildArray(num_leds) {
   serpentine = (document.getElementById("serpentineCHK")).checked;
-  reverse = (document.getElementById("reverseCHK")).checked;
+  vertical = (document.getElementById("verticalCHK")).checked;
+  hflip = (document.getElementById("hflipCHK")).checked;
+  vflip = (document.getElementById("vflipCHK")).checked;
+
 
   for (i = 0; i < num_leds; i++) {
     pixelarray[i] = [];
     pixelarray[i][0] = "E";
-    pixelarray[i][1] = "R";
+    pixelarray[i][1] = "N";
     pixelarray[i][2] = 0;
   }
 
@@ -97,6 +127,19 @@ function clearArrows(element) {
   while(childnodes[0]) {
     element.removeChild(childnodes[0]);
   }
+
+  // remove top arrows
+  childnodes = element.getElementsByClassName("triangle-top");
+  while(childnodes[0]) {
+    element.removeChild(childnodes[0]);
+  }
+
+  // remove bottom arrows
+  childnodes = element.getElementsByClassName("triangle-bottom");
+  while(childnodes[0]) {
+    element.removeChild(childnodes[0]);
+  }
+
 }
 
 
@@ -136,6 +179,10 @@ function drawArrows() {
         arrownode.className = "triangle-right";
       } else if (pixelarray[i][1] == "L") {
         arrownode.className = "triangle-left";
+      } else if (pixelarray[i][1] == "U") {
+        arrownode.className = "triangle-bottom";
+      } else if (pixelarray[i][1] == "D") {
+        arrownode.className = "triangle-top";
       }
       pixelElement.appendChild(arrownode);
     }
@@ -153,18 +200,57 @@ function countActiveLEDs() {
 function renumberLEDs() {
   var activeLEDs = 0;
   var inactiveLEDs = countActiveLEDs();
-  for (y = 0; y < ydim; y++) {
-    for (x = 0; x < xdim; x++) {
-      var ledpos = 0;
+  var xtemp = 0;
+  var ytemp = 0;
 
-      if ((((y % 2) == 0) || (serpentine==0)) ^ (reverse == 0)) {
-        ledpos = y*xdim+xdim-1-x;
-        pixelarray[ledpos][1] = "L";
+  if (vertical == 0 ) {
+    ytemp = ydim;
+    xtemp = xdim;
+  } else {
+    ytemp = xdim;
+    xtemp = ydim;
+  }
+
+
+  for (y = 0; y < ytemp; y++) {
+    for (x = 0; x < xtemp; x++) {
+
+
+      if (vertical == 0) {
+        if (vflip == 1) var ty = ytemp-y-1; else var ty = y;
+        if (hflip == 1) var tx = xtemp-x-1; else var tx = x;
       } else {
-        ledpos = y*xdim+x;
-        pixelarray[ledpos][1] = "R";
-
+        if (hflip == 1) var ty = ytemp-y-1; else var ty = y;
+        if (((hflip == 1) ^ (vflip == 1)) ^ (serpentine == 0 && hflip == 1)) var tx = xtemp-x-1;
+        else var tx = x;
       }
+
+      var ledpos = 0;
+      var tDir = 'N';
+
+        if ((((ty % 2) == 0) || (serpentine==0))) {
+          if (vertical == 0) {
+            ledpos = ty*xtemp+tx;
+            if (hflip == 1) tdir = "L"; else tdir = "R";
+          } else {
+            ledpos = tx*ytemp+ty;
+            if ((vflip == 1) ^ (serpentine == 1 && hflip == 1)) tdir = "U"; else tdir = "D";
+          }
+
+        } else {
+          if (vertical == 0) {
+            ledpos = ty*xtemp+xtemp-1-tx;
+            if (hflip == 1) tdir = "R"; else tdir = "L";
+          } else {
+            ledpos = (xtemp-tx-1)*ytemp+ty;
+            if ((vflip == 1) ^ (serpentine == 1 && hflip == 1)) tdir = "D"; else tdir = "U";
+          }
+
+
+        }
+
+      pixelarray[ledpos][1] = tdir;
+
       if (pixelarray[ledpos][0] == "E") {
           pixelarray[ledpos][2] = activeLEDs;
           activeLEDs++;

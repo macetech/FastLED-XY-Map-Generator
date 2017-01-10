@@ -28,7 +28,7 @@
   font-size: 0.75em;
   border: none;
   border-radius: 0.5em 0.5em 0 0;
-  font-family: sans-serif;;
+  font-family: sans-serif;
   text-align: center;
   vertical-align: middle;
   background-color: blue;
@@ -73,12 +73,10 @@
 }
 
 .controls {
-  font-family: sans-serif;
   font-size: 1em;
   display: block;
 }
 .inputBox {
-  font-family: sans-serif;
   height: 1.5em;
   line-height: 1.5em;
   width: 8em;

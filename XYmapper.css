@@ -2,7 +2,7 @@
   display:table-cell;
   position: relative;
   margin: 0em;
-  border:0.1em solid gray;
+  border:1px solid gray;
   min-width: 3em;
   height: 3em;
   text-align: right;
@@ -15,7 +15,7 @@
   display:table-cell;
   position: relative;
   margin: 0em;
-  border:0.1em solid gray;
+  border:1px solid gray;
   min-width: 3em;
   height: 3em;
   text-align: center;
@@ -48,6 +48,27 @@
 
 .ledrow {
   display: table-row;
+}
+
+.ylabels {
+  display: table-cell;
+  border:1px solid gray;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1em;
+  min-width: 2em;
+  color: white;
+  font-family: sans-serif;
+}
+.xlabels {
+  display: table-cell;
+  border:1px solid gray;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1em;
+  height: 2em;
+  color: white;
+  font-family: sans-serif;
 }
 
 .triangle-left {

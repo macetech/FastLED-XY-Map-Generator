@@ -95,8 +95,12 @@ function buildGrid(numBoxes) {
   buildArray(num_leds);
   idnum = 0;
   gridHTML += '<div class="ledarray">';
+  gridHTML += '<div class="ledrow"><div class="xlabels"></div>';
+  for (x = 0; x < xdim; x++) gridHTML += '<div class="xlabels">' + x + '</div>';
+  gridHTML += '<div class="xlabels"></div></div>';
   for (j = 0; j < ydim; j++) {
     gridHTML += '<div class="ledrow">';
+    gridHTML += '<div class="ylabels">' + j + '</div>';
     for (i = 0; i < xdim; i++) {
       gridHTML += '<div class="ledpixel" id="pixel' + idnum + '"';
       gridHTML += 'onclick="clearButton(this);">';
@@ -104,8 +108,12 @@ function buildGrid(numBoxes) {
       gridHTML += '</div>';
       idnum++;
     }
+    gridHTML += '<div class="ylabels">' + j + '</div>';
     gridHTML += "</div>";
   }
+  gridHTML += '<div class="ledrow"><div class="xlabels"></div>';
+  for (x = 0; x < xdim; x++) gridHTML += '<div class="xlabels">' + x + '</div>';
+  gridHTML += '<div class="xlabels"></div></div>';
   gridHTML += '</div>';
 
   container.innerHTML = gridHTML;

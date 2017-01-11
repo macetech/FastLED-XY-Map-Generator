@@ -227,8 +227,8 @@ function renumberLEDs() {
         if (hflip == 1) var tx = xtemp-x-1; else var tx = x;
       } else {
         if (hflip == 1) var ty = ytemp-y-1; else var ty = y;
-        //if (((hflip == 1) ^ (vflip == 1)) ^ (serpentine == 0 && hflip == 1)) var tx = xtemp-x-1;
-        if ((hflip == 1) ^ (serpentine == 1 && vflip == 1)) var tx = xtemp-x-1;
+        if (((hflip == 1) ^ (vflip == 1)) ^ (serpentine == 0 && hflip == 1)) var tx = xtemp-x-1;
+        //if ((hflip == 1) ^ (serpentine == 1 && vflip == 1)) var tx = xtemp-x-1;
         else var tx = x;
       }
 

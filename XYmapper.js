@@ -222,21 +222,22 @@ function renumberLEDs() {
 
   for (y = 0; y < ytemp; y++) {
     for (x = 0; x < xtemp; x++) {
-
-
       if (vertical == 0) {
         if (vflip == 1) var ty = ytemp-y-1; else var ty = y;
         if (hflip == 1) var tx = xtemp-x-1; else var tx = x;
       } else {
         if (hflip == 1) var ty = ytemp-y-1; else var ty = y;
-        if (((hflip == 1) ^ (vflip == 1)) ^ (serpentine == 0 && hflip == 1)) var tx = xtemp-x-1;
+        //if (((hflip == 1) ^ (vflip == 1)) ^ (serpentine == 0 && hflip == 1)) var tx = xtemp-x-1;
+        if ((hflip == 1) ^ (serpentine == 1 && vflip == 1)) var tx = xtemp-x-1;
         else var tx = x;
       }
 
       var ledpos = 0;
       var tDir = 'N';
+      var oddcols = (xdim % 2 == 1 && hflip == 1 && vertical == 1);
+      var evenrows = (ydim % 2 == 0 && vflip == 1 && vertical == 0);
 
-        if ((((ty % 2) == 0) || (serpentine==0))) {
+        if ((((ty+evenrows+oddcols) % 2) == 0) || (serpentine==0)) {
           if (vertical == 0) {
             ledpos = ty*xtemp+tx;
             if (hflip == 1) tdir = "L"; else tdir = "R";
@@ -253,8 +254,6 @@ function renumberLEDs() {
             ledpos = (xtemp-tx-1)*ytemp+ty;
             if ((vflip == 1) ^ (serpentine == 1 && hflip == 1)) tdir = "D"; else tdir = "U";
           }
-
-
         }
 
       pixelarray[ledpos][1] = tdir;
@@ -266,8 +265,6 @@ function renumberLEDs() {
           pixelarray[ledpos][2] = inactiveLEDs;
           inactiveLEDs++;
       }
-
-
 
       pixelID = "pixeltext" + ledpos;
       pixelElement = document.getElementById(pixelID);

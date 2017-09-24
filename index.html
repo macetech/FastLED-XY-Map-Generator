@@ -13,9 +13,10 @@
     <p>by Garrett Mace (macetech.com), inspired by Mark Kriegsman</p>
     <p>Code: <a href="https://github.com/macetech/FastLED-XY-Map-Generator">https://github.com/macetech/FastLED-XY-Map-Generator</a>
     <h3>Automatically generates XYmap function for irregular/gapped LED arrays.</h3>
-    <p>Set the maximum x and y dimensions, layout style (how the LEDs are actuall wired), and click Rebuild. Then click LEDs to edit the shape of the array by enabling and disabling pixels. 
-      The code is updated in realtime.</p>
+    <p>Set the maximum x and y dimensions, layout style (how the LEDs are actually wired), and click Rebuild.</p>
+    <p>Then click LEDs to edit the shape of the array by enabling and disabling pixels. The code is updated in realtime.</p>
     <p>Copy the resulting function and paste into your code.</p>
+    <p>The function will map ordinary X-Y coordinates to the irregular array, preserving pixels that land in gaps.</p>
 
     <div class="controls">
       <input type="checkbox" id="serpentineCHK" onchange="serpentineLayout(this)" checked>Serpentine</input>
